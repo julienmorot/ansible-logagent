@@ -1,0 +1,21 @@
+---
+
+- name: Install Metricbeat Package
+  ansible.builtin.package:
+    name: metricbeat
+    state: present
+
+- name: Deploy metricbeat.yml
+  ansible.builtin.template:
+    src: metricbeat.yml.j2
+    dest: /etc/metricbeat/metricbeat.yml
+    owner: root
+    group: root
+    mode: '0600'
+  notify: Restart metricbeat
+
+- name: Enable service Metricbeat
+  ansible.builtin.service:
+    name: metricbeat
+    enabled: yes
+    state: started

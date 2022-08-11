@@ -3,3 +3,6 @@
 - name: Include common and requirements playbook
   ansible.builtin.include_tasks: common.yml
 
+- name: Include metricbeat playbook
+  ansible.builtin.include_tasks: metricbeat.yml
+

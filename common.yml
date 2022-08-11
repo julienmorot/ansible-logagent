@@ -1,0 +1,35 @@
+---
+
+- name: Add Elastic GPG Key for APT
+  ansible.builtin.apt_key:
+    url: "{{ elastic_gpg_key_url }}"
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Add Elastic GPG key for RPM
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ elastic_gpg_key_url }}"
+  when: ansible_facts['os_family'] == "RedHat"
+
+- name: Install required packages
+  ansible.builtin.package:
+    name: apt-transport-https
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Add Elastic APT Repo
+  ansible.builtin.apt_repository:
+    repo: "deb {{ elastic_pkg_url }}/apt stable main"
+    state: present 
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Add Elastic Yum Repo
+  ansible.builtin.yum_repository:
+    name: elasticsearch
+    description: Elastic YUM repo
+    file: elasticsearch
+    baseurl: "{{ elastic_pkg_url }}/yum"
+    gpgcheck: yes
+  when: ansible_facts['os_family'] == "RedHat"
+

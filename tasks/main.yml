@@ -6,3 +6,5 @@
 - name: Include metricbeat playbook
   ansible.builtin.include_tasks: metricbeat.yml
 
+- name: Include filebeat playbook
+  ansible.builtin.include_tasks: filebeat.yml

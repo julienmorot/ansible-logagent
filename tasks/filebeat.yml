@@ -1,0 +1,21 @@
+---
+
+- name: Install Filebeat Package
+  ansible.builtin.package:
+    name: filebeat
+    state: present
+
+- name: Deploy filebeat.yml
+  ansible.builtin.template:
+    src: filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    owner: root
+    group: root
+    mode: '0600'
+  notify: Restart filebeat
+
+- name: Enable service Filebeat
+  ansible.builtin.service:
+    name: filebeat
+    enabled: yes
+    state: started

@@ -4,3 +4,8 @@
   ansible.builtin.service:
     name: metricbeat
     state: restarted
+
+- name: Restart filebeat
+  ansible.builtin.service:
+    name: filebeat
+    state: restarted

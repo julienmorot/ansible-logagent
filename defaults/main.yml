@@ -4,3 +4,5 @@ filebeat_enable_modules:
   - system
 
 filebeat_disable_modules:
+
+elastic_output_url: "localhost:9200"

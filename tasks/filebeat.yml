@@ -19,3 +19,12 @@
     name: filebeat
     enabled: yes
     state: started
+
+- name: Enable filebeat modules
+  ansible.builtin.command: filebeat modules enable {{ item }}
+  with_items: "{{ filebeat_enable_modules }}"
+
+
+- name: Disable filebeat modules
+  ansible.builtin.command: filebeat modules disable {{ item }}
+  with_items: "{{ filebeat_disable_modules }}"

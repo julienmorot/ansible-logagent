@@ -134,7 +134,11 @@ setup.kibana:
 # ---------------------------- Elasticsearch Output ----------------------------
 output.elasticsearch:
   # Array of hosts to connect to.
+  {% if elastic_output_url is defined %}
   hosts: ["{{ elastic_output_url }}"]
+  {% else %}
+  hosts: ["{{ ansible_host }}"]
+  {% endif %}
 
   # Protocol - either `http` (default) or `https`.
   #protocol: "https"

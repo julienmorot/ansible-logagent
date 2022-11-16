@@ -10,7 +10,7 @@ Simple Beat module to monitor a server with ELK
   become: yes
   remote_user: admin
   vars:
-    elastc_output_url: localhost:9200
+    elastic_output_url: logs01:9200,logs02:9200,logs03:9200
     filebeat_enable_modules:
       - system
       - iptables
